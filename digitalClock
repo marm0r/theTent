@@ -1,1 +1,47 @@
-echo "Hello"
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital clock</title>
+    <style>
+        body {
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="reloj"></div>
+    <div id="txt"></div>
+
+    <script>
+        function actualizarReloj() {
+            const reloj = document.getElementById("reloj");
+            const saludo = document.getElementById("txt");
+            const fecha = new Date();
+            const hora = fecha.getHours();
+            const minutos = fecha.getMinutes();
+            const segundos = fecha.getSeconds();
+
+            // Agregar un cero si los minutos o segundos son menores a 10
+            const formatoHora = `${hora < 10 ? '0' : ''}${hora}:${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+
+            reloj.textContent = formatoHora;
+
+            // Determinar el mensaje de saludo
+            if (hora >= 19 || hora < 5) {
+                saludo.textContent = "BUENAS NOCHES";
+            } else if (hora >= 5 && hora < 12) {
+                saludo.textContent = "BUENOS DÍAS";
+            } else {
+                saludo.textContent = "BUENAS TARDES";
+            }
+        }
+
+        // Actualizar el reloj cada segundo
+        setInterval(actualizarReloj, 1000);
+
+        // Actualizar el reloj al cargar la página
+        actualizarReloj();
+    </script>
+</body>
+</html>
